@@ -15,9 +15,9 @@ def create_directory_if_needed(base_path: str, file_path: str) -> None:
     None: This function does not return any value. It prints a success message if the directory is created, or an error message if the directory already exists.
     """
     file_created_datetime = get_file_creation_datetime(file_path)
-    directory_path_year = os.path.join(base_path, file_created_datetime_year_string)
     file_created_datetime_year_string = str(file_created_datetime.year)
     file_created_datetime_month_string = get_month_in_dutch_format(file_created_datetime.month)
+    directory_path_year = os.path.join(base_path, file_created_datetime_year_string)
 
     if does_directory_exist(base_path, file_created_datetime_year_string):
         if does_directory_exist(directory_path_year, file_created_datetime_month_string):

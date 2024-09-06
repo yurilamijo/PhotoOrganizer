@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import directory_generator
 
@@ -29,8 +30,9 @@ def get_all_directories_and_files() -> None:
 
         if os.path.isfile(file_path):
             directory_generator.create_directory_if_needed(PATH_DIRECTORY_VIDEOS, file_path)
+            # shutil.move(source_directory, destination_directory)
 
-            print(f"File: {file}")
+            print(f"File: {file_path}")
         elif os.path.isdir(file_path):
             print(f"Directory: {file}")
         else:
