@@ -31,7 +31,7 @@ def get_all_directories_and_files(base_path: str) -> None:
         elif os.path.isdir(file_path):
             print(f"Directory: {file}")
         else:
-            print(f"Unknown file type: {file}")
+            print(f"Unknown file type: {file} with path: {file_path}")
 
 def move_file_to_destination_directory(base_path: str, file_path: str, file: str) -> None:
     """
