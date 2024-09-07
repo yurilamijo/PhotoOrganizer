@@ -2,8 +2,10 @@ import os
 import shutil
 
 import directory_generator
+import directory_file_transfer_helper
 
 PATH_BASE = "/Volumes/T7 Shield"
+PATH_BASE_NO_NAME = "/Volumes/NO NAME"
 DIRECTORY_PHOTOS = "/photos"
 DIRECTORY_VIDEOS = "/videos"
 PATH_DIRECTORY_PHOTOS = PATH_BASE + DIRECTORY_PHOTOS
@@ -11,14 +13,16 @@ PATH_DIRECTORY_VIDEOS = PATH_BASE + DIRECTORY_VIDEOS
 
 def get_all_directories_and_files(path_base: str) -> None:
     """
-    This function retrieves all directories and files within the specified video directory.
-    It prints the names of the directories and files along with their creation timestamps.
+    This function iterates through all files and directories within a given base directory.
+    For each file, it creates a directory if needed and moves the file to the appropriate destination directory based on its creation date.
+    For each directory, it simply prints its name.
+    If an unknown file type is encountered, it prints the file's name and path.
 
     Parameters:
-    None
+    path_base (str): The base directory path where the function will start searching for files and directories.
 
     Returns:
-    None
+    None: The function does not return any value. It prints messages indicating the file and directory operations.
     """
     for file in os.listdir(path_base):
         path_file = os.path.join(path_base, file)
@@ -68,3 +72,6 @@ def determine_destination_directory_based_on_year_and_month(path_base: str, year
     return os.path.join(path_base, year, month, file)
 
 get_all_directories_and_files(PATH_DIRECTORY_VIDEOS)
+
+# WIP
+# directory_file_transfer_helper.move_files_to_destination_directories(PATH_BASE_NO_NAME, PATH_DIRECTORY_PHOTOS, PATH_DIRECTORY_VIDEOS)
