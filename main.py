@@ -11,7 +11,18 @@ DIRECTORY_VIDEOS = "/videos"
 PATH_DIRECTORY_PHOTOS = PATH_BASE + DIRECTORY_PHOTOS
 PATH_DIRECTORY_VIDEOS = PATH_BASE + DIRECTORY_VIDEOS
 
-def get_all_directories_and_files(path_base: str) -> None:
+def execute() -> None:
+    # sort_files_by_creation_date()
+    move_files_to_destination_directories()
+
+def sort_files_by_creation_date() -> None:
+    sort_all_directories_and_files(PATH_DIRECTORY_VIDEOS)
+    sort_all_directories_and_files(PATH_DIRECTORY_PHOTOS)
+
+def move_files_to_destination_directories() -> None:
+    directory_file_transfer_helper.execute(PATH_BASE_NO_NAME, PATH_DIRECTORY_PHOTOS, PATH_DIRECTORY_VIDEOS)
+
+def sort_all_directories_and_files(path_base: str) -> None:
     """
     This function iterates through all files and directories within a given base directory.
     For each file, it creates a directory if needed and moves the file to the appropriate destination directory based on its creation date.
@@ -71,7 +82,5 @@ def determine_destination_directory_based_on_year_and_month(path_base: str, year
     """
     return os.path.join(path_base, year, month, file)
 
-get_all_directories_and_files(PATH_DIRECTORY_VIDEOS)
-
-# WIP
-# directory_file_transfer_helper.move_files_to_destination_directories(PATH_BASE_NO_NAME, PATH_DIRECTORY_PHOTOS, PATH_DIRECTORY_VIDEOS)
+if __name__ == "__main__":
+    execute()
