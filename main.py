@@ -12,8 +12,8 @@ PATH_DIRECTORY_PHOTOS = PATH_BASE + DIRECTORY_PHOTOS
 PATH_DIRECTORY_VIDEOS = PATH_BASE + DIRECTORY_VIDEOS
 
 def execute() -> None:
-    # sort_files_by_creation_date()
-    move_files_to_destination_directories()
+    sort_files_by_creation_date()
+    # move_files_to_destination_directories()
 
 def sort_files_by_creation_date() -> None:
     sort_all_directories_and_files(PATH_DIRECTORY_VIDEOS)

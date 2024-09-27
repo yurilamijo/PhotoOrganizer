@@ -2,6 +2,7 @@ import time
 import os
 import shutil
 import concurrent.futures
+import pathlib
 
 def execute(source_directory: str, destination_directory_photos: str, destination_directory_videos: str) -> None:
     start_time = time.time()
@@ -35,7 +36,7 @@ def move_files_to_destination_directories(source_directory: str, destination_dir
 
     batch_size = 100
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         batches = []
 
         for root, dirs, files in os.walk(source_directory):
@@ -77,8 +78,13 @@ def move_batch_of_files(batches: list) -> None:
             if not os.path.exists(destination_directory):
                 os.makedirs(destination_directory)
                 
-            shutil.move(source_path, destination_directory)
-            print(f"Moved file: '{os.path.basename(source_path)}' to destination: '{destination_directory}'")
+            # shutil.move(source_path, destination_directory)
+            shutil.copy2(source_path, destination_directory)
+            creation_time = pathlib.Path(source_path).stat().st_ctime
+            os.utime(destination_directory, (creation_time, creation_time))  # Set access and modified times
+
+            # os.remove(source_path) # Remove the original file after copying
+            print(f"Copied file: '{os.path.basename(source_path)}' to destination: '{destination_directory}'")
         except Exception as e:
             print(f"Error moving file: '{os.path.basename(source_path)}' from '{source_path}' to '{destination_directory}': {str(e)}")
 
